@@ -1,16 +1,106 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const Form = () => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+  const formSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
-    <div className="w-full h-full flex items-center justify-center flex-col gap-2">
-        <h3 className="text-zinc-100 font-bold text-2xl">Form</h3>
+    <div
+      onSubmit={handleSubmit(formSubmit)}
+      className="w-full h-full flex items-center justify-center flex-col gap-2"
+    >
+      <h3 className="text-zinc-100 font-bold text-2xl">Form</h3>
       <div className="card bg-black p-1 w-80 rounded">
         <form className="p-1 text-zinc-100 flex flex-col gap-3" action="">
-            <input className="w-full py-1 text-xl" type="text" placeholder="Enter Your Image Url " />
-            <input className="w-full py-1 text-xl" type="text" placeholder="Enter Your Name " />
-            <input className="w-full py-1 text-xl" type="email" placeholder="Enter Your Email " />
-            <input className="w-full py-1 text-xl" type="number" placeholder="Enter Your Phone Number " />
-            <input className="bg-green-700 text-white rounded p-1 cursor-pointer" type="submit" />
+          <input
+            {...register("image", {
+              required: "Image Url is Required",
+              pattern: {
+                value: /^\S.*$/,
+                message: "No Blank Space Allowed At The Starting",
+              },
+            })}
+            className="w-full py-1 text-xl"
+            type="text"
+            placeholder="Enter Your Image Url "
+          />
+          {errors.image && (
+            <p className="text-red-700 text-lg font-medium">
+              {errors.image.message}
+            </p>
+          )}
+          <input
+            {...register("name", {
+              required: "Name is Required",
+              pattern: {
+                value: /^\S.*$/,
+                message: "No Blank Space Allowed At The Starting",
+              },
+            })}
+            className="w-full py-1 text-xl"
+            type="text"
+            placeholder="Enter Your Name "
+          />
+          {errors.name && (
+            <p className="text-red-700 text-lg font-medium">
+              {errors.name.message}
+            </p>
+          )}
+          <input
+            {...register("email", {
+              required: "Email is Required",
+              pattern: {
+                value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                message: "Please Enter Valid Email",
+              },
+            })}
+            className="w-full py-1 text-xl"
+            type="email"
+            placeholder="Enter Your Email "
+          />
+          {errors.email && (
+            <p className="text-red-700 text-lg font-medium">
+              {errors.email.message}
+            </p>
+          )}
+          <input
+            {...register("phone", {
+              required: "Phone Number is Required",
+              minLength: {
+                value: 10,
+                message: "Minimum 10 Digits Are Required",
+              },
+              maxLength: {
+                value: 10,
+                message: "Minimum 10 Digits Are Required",
+              },
+              pattern: {
+                value: /^[6-9]\d{9}$/,
+                message: "Please Enter Valid Phone Number",
+              },
+            })}
+            className="w-full py-1 text-xl"
+            type="number"
+            placeholder="Enter Your Phone Number "
+          />
+          {errors.phone && (
+            <p className="text-red-700 text-lg font-medium">
+              {errors.phone.message}
+            </p>
+          )}
+          <input
+            className="bg-green-700 text-white rounded p-1 cursor-pointer"
+            type="submit"
+          />
         </form>
       </div>
     </div>
