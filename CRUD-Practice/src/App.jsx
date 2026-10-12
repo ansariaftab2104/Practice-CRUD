@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
   return (
-    <div>
-      <h1>App</h1>
+    <div className="w-full min-h-screen bg-zinc-300">
+      <Navbar />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
