@@ -6,6 +6,7 @@ const Form = () => {
         <h3 className="text-zinc-100 font-bold text-2xl">Form</h3>
       <div className="card bg-black p-1 w-80 rounded">
         <form className="p-1 text-zinc-100 flex flex-col gap-3" action="">
+            <input className="w-full py-1 text-xl" type="text" placeholder="Enter Your Image Url " />
             <input className="w-full py-1 text-xl" type="text" placeholder="Enter Your Name " />
             <input className="w-full py-1 text-xl" type="email" placeholder="Enter Your Email " />
             <input className="w-full py-1 text-xl" type="number" placeholder="Enter Your Phone Number " />
